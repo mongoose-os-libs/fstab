@@ -6,13 +6,13 @@ Configures storage devices, creates and/or mounts filesystems according to confi
 
 ## Configuration
 
-This library devines two configurtion sections: `devtab` and `fstab`, 3 entries each.
+This library defines two configurtion sections: `devtab` and `fstab`, 3 entries each.
 
-Devtab devines VFS devices to be created, fstab defines fielstsrems to create and/or mount.
+Devtab defines VFS devices to be created, fstab defines filesystems to create and/or mount.
 
 Devtab is processed first, then fstab.
 
-See `config_schema` section of the [manifest](config_schema) for detaield description of settings..
+See `config_schema` section of the [manifest](mos.yml) for detailed description of settings.
 
 ## Examples
 
