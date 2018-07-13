@@ -98,6 +98,14 @@ static bool process_fstab_from_config(void) {
   return res;
 }
 
-bool mgos_fstab_init(void) {
+bool mgos_fstab_init_real(void) {
   return (process_devtab_from_config() && process_fstab_from_config());
+}
+
+bool mgos_fstab_init(void) {
+#ifndef FSTAB_TEST
+  return mgos_fstab_init_real();
+#else
+  return true;
+#endif
 }

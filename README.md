@@ -82,7 +82,7 @@ config_schema:
   - ["devtab.dev2.opts", '{"dev": "spif0", "offset": 131072}']
   - ["fstab.fs0.dev", "spif0p1"]
   - ["fstab.fs0.type", "SPIFFS"]
-  - ["fstab.fs0.opts", '{"bs": 1024, "ps": 128, "es": 4096}']
+  - ["fstab.fs0.opts", '{"bs": 4096, "ps": 128, "es": 4096}']
   - ["fstab.fs0.path", "/data"]
   - ["fstab.fs0.create", true]
 ```
