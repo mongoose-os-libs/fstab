@@ -14,6 +14,8 @@ libs:
 init_after:
   - i2c
   - spi
+  - vfs-dev-*
+  - vfs-fs-*
 
 config_schema:
   - ["devtab", "o", {title: "Devices to initialize"}]
@@ -29,6 +31,14 @@ config_schema:
   - ["devtab.dev2.name", "s", "", {title: "Device name"}]
   - ["devtab.dev2.type", "s", "", {title: "Device type"}]
   - ["devtab.dev2.opts", "s", "", {title: "Device options"}]
+  - ["devtab.dev3", "o", {title: "Device table entry 3"}]
+  - ["devtab.dev3.name", "s", "", {title: "Device name"}]
+  - ["devtab.dev3.type", "s", "", {title: "Device type"}]
+  - ["devtab.dev3.opts", "s", "", {title: "Device options"}]
+  - ["devtab.dev4", "o", {title: "Device table entry 4"}]
+  - ["devtab.dev4.name", "s", "", {title: "Device name"}]
+  - ["devtab.dev4.type", "s", "", {title: "Device type"}]
+  - ["devtab.dev4.opts", "s", "", {title: "Device options"}]
   - ["fstab", "o", {title: "Filesystems to create and mount"}]
   - ["fstab.fs0", "o", {title: "FS table entry 0"}]
   - ["fstab.fs0.dev", "s", "", {title: "Device name"}]

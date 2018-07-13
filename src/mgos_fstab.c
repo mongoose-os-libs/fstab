@@ -31,7 +31,12 @@ static const char *ns(const char *s) {
 
 static bool process_devtab_from_config(void) {
   char *dt = NULL;
-  mg_asprintf(&dt, 0, "%s %s %s\n%s %s %s\n%s %s %s",
+  mg_asprintf(&dt, 0,
+              "%s %s %s\n"
+              "%s %s %s\n"
+              "%s %s %s\n"
+              "%s %s %s\n"
+              "%s %s %s",
               ns(mgos_sys_config_get_devtab_dev0_name()),
               ns(mgos_sys_config_get_devtab_dev0_type()),
               ns(mgos_sys_config_get_devtab_dev0_opts()),
@@ -40,7 +45,13 @@ static bool process_devtab_from_config(void) {
               ns(mgos_sys_config_get_devtab_dev1_opts()),
               ns(mgos_sys_config_get_devtab_dev2_name()),
               ns(mgos_sys_config_get_devtab_dev2_type()),
-              ns(mgos_sys_config_get_devtab_dev2_opts()));
+              ns(mgos_sys_config_get_devtab_dev2_opts()),
+              ns(mgos_sys_config_get_devtab_dev3_name()),
+              ns(mgos_sys_config_get_devtab_dev3_type()),
+              ns(mgos_sys_config_get_devtab_dev3_opts()),
+              ns(mgos_sys_config_get_devtab_dev4_name()),
+              ns(mgos_sys_config_get_devtab_dev4_type()),
+              ns(mgos_sys_config_get_devtab_dev4_opts()));
   bool res = mgos_process_devtab(dt);
   free(dt);
   return res;

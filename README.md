@@ -6,7 +6,7 @@ Configures storage devices, creates and/or mounts filesystems according to confi
 
 ## Configuration
 
-This library defines two configurtion sections: `devtab` and `fstab`, 3 entries each.
+This library defines two configurtion sections: `devtab` (5 entries) and `fstab` (3 entries).
 
 Devtab defines VFS devices to be created, fstab defines filesystems to create and/or mount.
 
