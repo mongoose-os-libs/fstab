@@ -64,6 +64,14 @@ config_schema:
   - ["fstab.fs2.create", "b", false, {title: "Create on first boot"}]
   - ["fstab.fs2.optional", "b", false, {title: "Failure to create/mount is not fatal"}]
   - ["fstab.fs2.created", "b", false, {title: "This flag is set after creation"}]
+  # For backward compatibility only.
+  - ["sys.mount", "o", {title: "Extra filesystem to mount"}]
+  - ["sys.mount.path", "s", "", {title: "Mount point"}]
+  - ["sys.mount.dev_type", "s", "", {title: "Storage device type"}]
+  - ["sys.mount.dev_opts", "s", "", {title: "Storage device options"}]
+  - ["sys.mount.fs_type", "s", "", {title: "Filesystem type"}]
+  - ["sys.mount.fs_opts", "s", "", {title: "Filesystem options"}]
+
 
 tags:
   - c

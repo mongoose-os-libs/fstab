@@ -25,13 +25,20 @@
 
 #include "common/cs_dbg.h"
 
+#define MGOS_SYS_MOUNT_DEV_NAME "smd"
+
 static const char *ns(const char *s) {
   return (s != NULL ? s : "");
 }
 
 static bool process_devtab_from_config(void) {
   char *dt = NULL;
+  const char *sys_mount_dev_name =
+      (mgos_sys_config_get_sys_mount_dev_type() == NULL
+           ? ""
+           : MGOS_SYS_MOUNT_DEV_NAME);
   mg_asprintf(&dt, 0,
+              "%s %s %s\n"
               "%s %s %s\n"
               "%s %s %s\n"
               "%s %s %s\n"
@@ -51,7 +58,9 @@ static bool process_devtab_from_config(void) {
               ns(mgos_sys_config_get_devtab_dev3_opts()),
               ns(mgos_sys_config_get_devtab_dev4_name()),
               ns(mgos_sys_config_get_devtab_dev4_type()),
-              ns(mgos_sys_config_get_devtab_dev4_opts()));
+              ns(mgos_sys_config_get_devtab_dev4_opts()), sys_mount_dev_name,
+              ns(mgos_sys_config_get_sys_mount_dev_type()),
+              ns(mgos_sys_config_get_sys_mount_dev_opts()));
   bool res = mgos_process_devtab(dt);
   free(dt);
   return res;
@@ -98,8 +107,27 @@ static bool process_fstab_from_config(void) {
   return res;
 }
 
+static bool process_sys_mount(void) {
+  struct mgos_config_fstab_fs0 e = {
+      .dev = MGOS_SYS_MOUNT_DEV_NAME,
+      .type = (char *) mgos_sys_config_get_sys_mount_fs_type(),
+      .opts = (char *) mgos_sys_config_get_sys_mount_fs_opts(),
+      .path = (char *) mgos_sys_config_get_sys_mount_path(),
+      .create = false,
+      .created = false,
+  };
+  bool unused;
+  if (e.path != NULL) {
+    LOG(LL_WARN,
+        ("sys.mount.* is deprecated and will be removed, please "
+         "use fstab.* - https://github.com/mongoose-os-libs/fstab#overview"));
+  }
+  return process_fstab_config_entry(&e, &unused);
+}
+
 bool mgos_fstab_init_real(void) {
-  return (process_devtab_from_config() && process_fstab_from_config());
+  return (process_devtab_from_config() && process_fstab_from_config() &&
+          process_sys_mount());
 }
 
 bool mgos_fstab_init(void) {
